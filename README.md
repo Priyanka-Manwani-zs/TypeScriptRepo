@@ -1,1 +1,3 @@
 # TypeScriptRepo
+
+#hellooo typescript
