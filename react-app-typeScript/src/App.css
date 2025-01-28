@@ -1,42 +1,78 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  height: 100%;
+  position: relative;
+}
+.maindiv {
+  background-color: beige;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  box-shadow: 40px 40px 60px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.display {
+  height: 200px;
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  left: 3%;
+
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.char {
+  border-bottom: 3px solid;
+  height: 50px;
+  width: 100px;
+  margin: 60px 3px 3px 3px;
+
+  font-size: 50px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.overDiv {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(8, 9, 8, 0.5);
+  position: absolute;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.gameOver {
+  height: 300px;
+  width: 300px;
+  background-color: rgb(218, 110, 110);
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+input {
+  margin-bottom: 70px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+  font-size: 30px;
+  margin-bottom: 90px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.succes {
+  color: green;
 }
-
-.card {
-  padding: 2em;
+.partialSucess {
+  color: orange;
 }
-
-.read-the-docs {
-  color: #888;
+.wrong {
+  color: red;
+}
+.moves {
+  margin-top: 50px;
+  font-size: 30px;
 }
