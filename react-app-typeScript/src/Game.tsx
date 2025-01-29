@@ -3,6 +3,8 @@ import "./App.css";
 import { generate, count } from "random-words";
 const Game: React.FC = () => {
   const [word, setWord] = useState("");
+  const [over, setOver] = useState<Boolean>(false);
+  const [win, setWin] = useState<Boolean>();
   const randomWords = generate(7);
   console.log(randomWords);
 
@@ -10,7 +12,7 @@ const Game: React.FC = () => {
     const index = Math.floor(Math.random() * randomWords.length);
     const randomWord = randomWords[index];
     setWord(randomWord);
-  }, []);
+  }, [win, over]);
   // let wordArr: string[];
   // if (word.length > 0) {
   //   wordArr = word.toLowerCase().split("");
@@ -24,9 +26,8 @@ const Game: React.FC = () => {
   const [wrong, setWrong] = useState<Boolean>(false);
   const [wrongPos, setWrongPos] = useState<Boolean>(false);
   const [place, setPlace] = useState<string[]>([]);
-  const [over, setOver] = useState<Boolean>(false);
+
   const [moves, setMoves] = useState<Number>(5);
-  const [win, setWin] = useState<Boolean>();
 
   function CheckWord(e: React.ChangeEvent<HTMLInputElement>): void {
     if (pos == wordArr.length) {
@@ -50,6 +51,14 @@ const Game: React.FC = () => {
 
     for (let i = 0; i < wordArr.length; i++) {
       if (value === wordArr[i]) {
+        if (place.includes(wordArr[i])) {
+          place[pos] = wordArr[i];
+          setPos((prev) => prev + 1);
+          setCorrect(true);
+          setWrong(false);
+          setWrongPos(false);
+          return;
+        }
         matchFound = true;
         if (pos === i) {
           setPos((prev) => prev + 1);
@@ -84,9 +93,11 @@ const Game: React.FC = () => {
     setCorrect(false);
     setInput("");
     setPlace([]);
+    setPos(0);
   }
-  //   console.log("printed", place);
-  //   console.log("input", arr);
+  console.log("printed", place);
+  console.log("input", wordArr);
+  console.log("ind", pos);
   //   console.log("moves", moves);
   return (
     <>
