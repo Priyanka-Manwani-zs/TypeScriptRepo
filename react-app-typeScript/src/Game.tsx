@@ -26,8 +26,13 @@ const Game: React.FC = () => {
   const [place, setPlace] = useState<string[]>([]);
   const [over, setOver] = useState<Boolean>(false);
   const [moves, setMoves] = useState<Number>(5);
+  const [win, setWin] = useState<Boolean>();
 
   function CheckWord(e: React.ChangeEvent<HTMLInputElement>): void {
+    if (pos == wordArr.length) {
+      setWin(true);
+      return;
+    }
     if (moves == 0) {
       setOver(true);
       return;
@@ -73,6 +78,12 @@ const Game: React.FC = () => {
   function HandleRestart(): void {
     setMoves(5);
     setOver(false);
+    setWin(false);
+    setWrong(false);
+    setWrongPos(false);
+    setCorrect(false);
+    setInput("");
+    setPlace([]);
   }
   //   console.log("printed", place);
   //   console.log("input", arr);
@@ -114,6 +125,16 @@ const Game: React.FC = () => {
             <div className="gameOver">
               <p>oops! you are out of moves</p>
               <button onClick={HandleRestart}>Try Again</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {win && (
+        <div className="overDiv">
+          <div>
+            <div className="gameWin">
+              <p>congratulations! You did it..🥳</p>
+              <button onClick={HandleRestart}>Play Again</button>
             </div>
           </div>
         </div>
