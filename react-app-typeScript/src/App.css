@@ -1,40 +1,100 @@
 #root {
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  height: 100%;
-  width: 100%;
-}
-.maindiv {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: flex;
-  flex-direction: row;
-}
-
-img {
-  position: absolute;
-  left: 20%;
-  border-radius: 30px;
-}
-
-.prev {
-  position: absolute;
-  top: 22%;
-  left: 20%;
-}
-.next {
-  position: absolute;
-  top: 22%;
-  right: 29%;
-}
-.dot {
-  position: absolute;
-  top: 40%;
-  right: 50%;
+  justify-content: center;
+  align-items: center;
 }
 .carosal {
   display: flex;
   flex-direction: row;
   position: relative;
+  overflow: hidden;
+  width: 700px;
+  height: 700px;
 }
+
+.maindiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.next,
+.prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev {
+  left: 7%;
+}
+
+.next {
+  right: 7%;
+}
+
+.dot {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.dot span {
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.maindiv img {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 30px;
+  position: absolute;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* .slide-next img {
+  animation: slideNext 0.5s ease-in-out forwards;
+}
+
+.slide-prev img {
+  animation: slidePrev 0.5s ease-in-out forwards;
+}
+
+@keyframes slideNext {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slidePrev {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+} */
