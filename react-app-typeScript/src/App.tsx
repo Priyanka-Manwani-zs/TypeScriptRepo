@@ -17,6 +17,7 @@ function App() {
   const [active, setActive] = useState<Boolean>(false);
   const [prevbuttons, setPrevButtons] = useState<Boolean>(false);
   const buttons: any[] = [];
+  const [animation, setAnimation] = useState<string>("");
 
   const [pg, setPg] = useState<number>(1);
 
