@@ -2,55 +2,90 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  height: 100vh;
-  width: 100vw;
+  max-height: 80vh;
+  max-width: 100%;
   text-align: center;
 }
 
-.dashboard {
-  margin-top: 60px;
-  height: 90vh;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+.maindiv {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
 }
+
+.dashboard {
+  margin-top: 0;
+  min-height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
 .product {
-  height: 100px;
-  width: 100px;
+  height: 300px;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 10px;
 }
+
 p {
-  height: 10px;
-  width: 20px;
+  min-height: 20px;
+  width: auto;
+  text-align: center;
 }
+
 .buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 5px;
   width: 100%;
+  position: relative;
+  margin-top: 20px;
 }
-
-.hightlight {
-  background-color: green;
+.buttons button {
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;
 }
 
 @media only screen and (max-width: 600px) {
   .dashboard {
     margin-top: 60px;
-    height: 80vh;
-    width: 100vw;
+    min-height: 80vh;
+    width: 100%;
     display: grid;
     grid-template-columns: auto auto;
+    gap: 10px;
   }
 
-  /* .buttons {
+  .buttons {
     position: fixed;
-    top: 90%;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: row;
-    box-shadow: rgb(40, 34, 34);
-  } */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+  }
+}
+
+.fill {
+  background-color: green;
+  height: 40px;
+  width: 40px;
+}
+
+.unfill {
+  background-color: white;
+  border: 1px solid #ccc;
 }

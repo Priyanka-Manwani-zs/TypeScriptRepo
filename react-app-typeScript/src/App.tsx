@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { MdNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
+import { BiFirstPage } from "react-icons/bi";
+import { MdLastPage } from "react-icons/md";
 
 interface Product {
   id: number;
@@ -55,6 +57,14 @@ function App() {
       </div>
 
       <div className="buttons">
+        <button
+          onClick={() => {
+            setPg(1);
+          }}
+        >
+          <BiFirstPage />
+        </button>
+
         {pg > 1 && (
           <button
             onClick={() => {
@@ -80,6 +90,7 @@ function App() {
                 onClick={() => {
                   setPg(btn);
                 }}
+                className={key == pg - 1 ? "fill" : "notfill"}
               >
                 {btn}
               </button>
@@ -93,6 +104,7 @@ function App() {
                 onClick={() => {
                   setPg(btn);
                 }}
+                className={key == pg - 1 ? "fill" : "notfill"}
               >
                 {btn}
               </button>
@@ -104,6 +116,7 @@ function App() {
                 onClick={() => {
                   setPg(btn);
                 }}
+                className={key == pg - 1 ? "fill" : "notfill"}
               >
                 {btn}
               </button>
@@ -127,6 +140,13 @@ function App() {
           }}
         >
           <MdNavigateNext />
+        </button>
+        <button
+          onClick={() => {
+            setPg(10);
+          }}
+        >
+          <MdLastPage />
         </button>
       </div>
     </div>
