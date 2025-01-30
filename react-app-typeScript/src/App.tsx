@@ -49,7 +49,7 @@ function App() {
             <img
               src={product.images[0]}
               alt={product.title}
-              style={{ width: "200px", height: "200px", objectFit: "cover" }}
+              style={{ width: "200px", height: "200px", objectFit: "contain" }}
             />
             <span>{product.title}</span>
           </div>
