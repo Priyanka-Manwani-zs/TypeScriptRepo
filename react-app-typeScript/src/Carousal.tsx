@@ -1,47 +1,48 @@
-import React, { useState } from "react";
-import useImgaes from "./useImgaes";
+import { useState } from "react";
 import "./App.css";
 import { MdNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
 import { GoDotFill } from "react-icons/go";
 
-function Carousal({ data }) {
-  // const { data, loading, err } = useImgaes("http://localhost:3000/images");
-
+function Carousal({ data }:any) {
   const [pg, setPg] = useState<number>(0);
+  const [animationDirection, setAnimationDirection] = useState<string>("");
 
-  // if (loading) return <p>Loading...</p>;
-  // if (err) return <p>Error {err}</p>;
+  const handleNext = () => {
+    setAnimationDirection("next");
+    pg == data.length - 1 ? setPg(0) : setPg((prev) => prev + 1);
+  };
 
-  // if (!data) return null;
+  const handlePrev = () => {
+    setAnimationDirection("prev");
+    pg == 0 ? setPg(data.length - 1) : setPg((prev) => prev - 1);
+  };
 
   return (
     <>
       <div className="carosal">
         <div className="maindiv">
-          {data ? <img src={data[pg]?.src} alt="" /> : null}
+          {data ? (
+            <img
+              className={`carousel-image ${animationDirection}`}
+              src={data[pg]?.src}
+              alt=""
+              onAnimationEnd={() => setAnimationDirection("")}
+            />
+          ) : null}
         </div>
         <div className="next">
-          <button
-            onClick={() => {
-              pg == data.length - 1 ? setPg(0) : setPg((prev) => prev + 1);
-            }}
-          >
+          <button onClick={handleNext}>
             <MdNavigateNext />
           </button>
         </div>
         <div className="prev">
-          <button
-            onClick={() => {
-              pg == 0 ? setPg(data.length - 1) : setPg((prev) => prev + 1);
-            }}
-          >
+          <button onClick={handlePrev}>
             <GrFormPrevious />
           </button>
         </div>
         <div className="dot">
-          {" "}
-          {data.map((ele, key) => {
+          {data.map((_:any, key) => {
             return <GoDotFill key={key} color={pg == key ? "red" : "white"} />;
           })}
         </div>
