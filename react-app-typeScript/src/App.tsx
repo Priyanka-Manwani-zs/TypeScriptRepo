@@ -48,11 +48,12 @@ function App() {
         {arr.slice(pg * 10 - 10, pg * 10).map((product) => (
           <div key={product.id} className="product">
             <img
+              className="img"
               src={product.images[0]}
               alt={product.title}
               style={{ width: "200px", height: "200px", objectFit: "contain" }}
             />
-            <span>{product.title}</span>
+            <span className="elipses">{product.title}</span>
           </div>
         ))}
       </div>
@@ -60,7 +61,11 @@ function App() {
       <div className="buttons">
         <button
           onClick={() => {
-            setPg(1);
+            if (pg == 1) {
+              setPg(10);
+            } else {
+              setPg(1);
+            }
           }}
         >
           <BiFirstPage />
@@ -96,7 +101,9 @@ function App() {
                 {btn}
               </button>
             ) : (
-              <p key={key}>.</p>
+              <p key={key} className="dots">
+                .
+              </p>
             );
           } else if (key >= 9) {
             return (
@@ -144,7 +151,11 @@ function App() {
         </button>
         <button
           onClick={() => {
-            setPg(10);
+            if (pg == 10) {
+              setPg(1);
+            } else {
+              setPg(10);
+            }
           }}
         >
           <MdLastPage />
