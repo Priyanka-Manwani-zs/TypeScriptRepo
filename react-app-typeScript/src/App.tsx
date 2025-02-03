@@ -8,39 +8,53 @@ import { MdLastPage } from "react-icons/md";
 interface Product {
   id: number;
   title: string;
-
   images: string[];
 }
 
 function App() {
   const [arr, setArr] = useState<Product[]>([]);
-  const [active, setActive] = useState<Boolean>(false);
-  const [prevbuttons, setPrevButtons] = useState<Boolean>(false);
-  const buttons: any[] = [];
-  const [animation, setAnimation] = useState<string>("");
-
+  const [showButtons, setShowButtons] = useState<number[]>([1, 2, 3, 4, 5]);
   const [pg, setPg] = useState<number>(1);
 
-  const generateButtons = () => {
-    for (let i = 1; i <= 10; i++) {
-      buttons.push(i);
-    }
-
-    return buttons;
-  };
-  generateButtons();
-  console.log(buttons);
-
   const fetchImages = async () => {
-    const response = await fetch("https://dummyjson.com/products?limit=100");
+    const response = await fetch("https://dummyjson.com/products?limit=150");
     const data = await response.json();
-
     setArr(data.products);
   };
 
   useEffect(() => {
     fetchImages();
   }, []);
+
+  const PagesNumber: number = Math.ceil(arr.length / 10);
+
+  const generateButtons = () => {
+    let buttons: number[] = [];
+    if (PagesNumber <= 5) {
+      for (let i = 1; i <= PagesNumber; i++) {
+        buttons.push(i);
+      }
+    } else {
+      if (pg <= 3) {
+        buttons = [1, 2, 3, 4, 5];
+      } else if (pg >= PagesNumber - 2) {
+        buttons = [
+          PagesNumber - 4,
+          PagesNumber - 3,
+          PagesNumber - 2,
+          PagesNumber - 1,
+          PagesNumber,
+        ];
+      } else {
+        buttons = [pg - 2, pg - 1, pg, pg + 1, pg + 2];
+      }
+    }
+    setShowButtons(buttons);
+  };
+
+  useEffect(() => {
+    generateButtons();
+  }, [pg, PagesNumber]);
 
   return (
     <div className="maindiv">
@@ -59,105 +73,33 @@ function App() {
       </div>
 
       <div className="buttons">
-        <button
-          onClick={() => {
-            if (pg == 1) {
-              setPg(10);
-            } else {
-              setPg(1);
-            }
-          }}
-        >
+        <button onClick={() => setPg(1)}>
           <BiFirstPage />
         </button>
 
-        {pg > 1 && (
+        <button
+          onClick={() => setPg((prev) => (prev > 1 ? prev - 1 : PagesNumber))}
+        >
+          <GrFormPrevious />
+        </button>
+
+        {showButtons.map((btn, key) => (
           <button
-            onClick={() => {
-              if (pg > 1) {
-                setPg((prev) => prev - 1);
-                if (pg == 6) {
-                  setActive(false);
-                  setPrevButtons(false);
-                }
-              } else {
-                alert("you are on last page");
-              }
-            }}
+            key={key}
+            onClick={() => setPg(btn)}
+            className={btn === pg ? "fill" : "notfill"}
           >
-            <GrFormPrevious />
+            {btn}
           </button>
-        )}
-        {buttons.map((btn, key) => {
-          if (key <= 4) {
-            return !prevbuttons ? (
-              <button
-                key={key}
-                onClick={() => {
-                  setPg(btn);
-                }}
-                className={key == pg - 1 ? "fill" : "notfill"}
-              >
-                {btn}
-              </button>
-            ) : (
-              <p key={key} className="dots">
-                .
-              </p>
-            );
-          } else if (key >= 9) {
-            return (
-              <button
-                key={key}
-                onClick={() => {
-                  setPg(btn);
-                }}
-                className={key == pg - 1 ? "fill" : "notfill"}
-              >
-                {btn}
-              </button>
-            );
-          } else {
-            return active ? (
-              <button
-                key={key}
-                onClick={() => {
-                  setPg(btn);
-                }}
-                className={key == pg - 1 ? "fill" : "notfill"}
-              >
-                {btn}
-              </button>
-            ) : (
-              <p key={key}>.</p>
-            );
-          }
-        })}
+        ))}
 
         <button
-          onClick={() => {
-            if (pg < 10) {
-              setPg((prev) => prev + 1);
-              if (pg == 5) {
-                setActive(true);
-                setPrevButtons(true);
-              }
-            } else {
-              alert("you are on last page");
-            }
-          }}
+          onClick={() => setPg((prev) => (prev < PagesNumber ? prev + 1 : 1))}
         >
           <MdNavigateNext />
         </button>
-        <button
-          onClick={() => {
-            if (pg == 10) {
-              setPg(1);
-            } else {
-              setPg(10);
-            }
-          }}
-        >
+
+        <button onClick={() => setPg(PagesNumber)}>
           <MdLastPage />
         </button>
       </div>
