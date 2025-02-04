@@ -13,7 +13,7 @@ interface Product {
 
 function App() {
   const [arr, setArr] = useState<Product[]>([]);
-  const [showButtons, setShowButtons] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [showButtons, setShowButtons] = useState<number[]>([]);
   const [pg, setPg] = useState<number>(1);
 
   const fetchImages = async () => {
