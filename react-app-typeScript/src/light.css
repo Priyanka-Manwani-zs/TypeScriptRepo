@@ -1,0 +1,58 @@
+.maindiv {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.light {
+  height: 500px;
+  width: 200px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  margin: 7px;
+  background-color: white;
+  border-radius: 60px;
+}
+
+.stand {
+  height: 100px;
+  background-color: black;
+  width: 30px;
+}
+
+.red {
+  height: 100px;
+  width: 100px;
+  margin: 7px;
+
+  border-radius: 60px;
+  background-color: red;
+}
+.yellow {
+  height: 100px;
+  width: 100px;
+  margin: 7px;
+
+  border-radius: 60px;
+  background-color: yellow;
+}
+.green {
+  height: 100px;
+  width: 100px;
+  margin: 7px;
+
+  border-radius: 60px;
+
+  background-color: green;
+}
